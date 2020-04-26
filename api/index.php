@@ -1,10 +1,12 @@
 <?php
-header("Access-Control-Allow-Origin: *");
 header('Content-Type: application/json');
 
-$IS_DEV = true;
+$env = parse_ini_file(__DIR__ . '/.env');
+
+$IS_DEV = $env['IS_DEV'];
 
 if ($IS_DEV) {
+	header("Access-Control-Allow-Origin: *");
 	require_once __DIR__.'./mysqli.php';
 	$conn = new SimpleMySQLi("127.0.0.1:3307", "root", "", "s53143__spring_p", "utf8mb4", "assoc");
 } else {
